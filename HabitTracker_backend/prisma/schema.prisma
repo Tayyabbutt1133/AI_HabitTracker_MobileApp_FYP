@@ -30,6 +30,7 @@ model Habits{
   frequency String
   askAI String
   AIsuggestions String
+  status String @default("pending")
   userId Int
   user User @relation(fields: [userId], references: [id])
 }

@@ -80,7 +80,6 @@ export async function getHabitDetailById(req, res) {
         const habit = await prisma.habits.findUnique({
             where: { id: habit_id },
         });
-        console.log("All habit details : ", habit);
 
         if (!habit) {
             return res.status(404).json({ message: "Habit not found" });
@@ -99,24 +98,23 @@ export async function getHabitDetailById(req, res) {
 export async function updateHabit(req, res) {
     try {
         const habitId = Number(req.params.habitId);
-        const { habit_name, description, frequency, askAI, AIsuggestions } = req.body;
+        const { habit_name, description, frequency, askAI, status } = req.body;
 
         if (!habitId || isNaN(habitId)) {
             return res.status(400).json({ message: "Invalid habit ID" });
         }
 
-        const existingHabit = await prisma.habits.findUnique({
+        const existingAskfromAI = await prisma.habits.findUnique({
             where: { id: habitId },
-            select: { AIsuggestions: true },
+            select: { askAI: true },
         });
-
-        if (!existingHabit) {
+        if (!existingAskfromAI) {
             return res.status(404).json({ message: "Habit not found" });
         }
 
-        let updatedSuggestion = AIsuggestions;
+        let updatedSuggestion;
 
-        if (AIsuggestions !== existingHabit.AIsuggestions) {
+        if (askAI !== existingAskfromAI.askAI) {
             try {
                 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
                 const AIResponse = await groq.chat.completions.create({
@@ -148,6 +146,7 @@ export async function updateHabit(req, res) {
                 frequency,
                 askAI,
                 AIsuggestions: updatedSuggestion,
+                status : status
             },
         });
 

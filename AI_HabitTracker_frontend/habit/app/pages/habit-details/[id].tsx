@@ -89,6 +89,10 @@ export default function HabitDetail() {
           <Text className="text-blue-700 font-semibold mb-1">Frequency</Text>
           <Text className="text-gray-800">{habit.frequency}</Text>
         </View>
+        <View className="bg-blue-50 rounded-xl p-4 mb-4">
+          <Text className="text-blue-700 font-semibold mb-1">Status</Text>
+          <Text className="text-gray-800">{habit.status.charAt(0).toUpperCase() + habit.status.slice(1)}</Text>
+        </View>
 
         <View className="bg-yellow-50 rounded-xl p-4 mb-4">
           <Text className="text-yellow-700 font-semibold mb-1">Ask AI</Text>

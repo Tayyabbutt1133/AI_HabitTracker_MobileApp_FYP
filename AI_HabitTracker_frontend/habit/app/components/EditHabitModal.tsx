@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Modal,
     View,
@@ -9,9 +9,20 @@ import {
 } from "react-native";
 
 const EditHabitModal = ({ visible, habit, onClose, onSave }: any) => {
-    const [formData, setFormData] = useState(habit || {});
+    const [formData, setFormData] = useState({
+        ...habit,
+        status: habit?.status || "pending", // default value
+    });
+
     const [confirming, setConfirming] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    // Update formData whenever habit changes (useful when modal opens)
+    useEffect(() => {
+        if (habit) {
+            setFormData({ ...habit, status: habit?.status || "pending" });
+        }
+    }, [habit]);
 
     const handleChange = (key: string, value: string) => {
         setFormData({ ...formData, [key]: value });
@@ -22,13 +33,14 @@ const EditHabitModal = ({ visible, habit, onClose, onSave }: any) => {
 
         try {
             setLoading(true);
-
-            // Dummy update API — replace later
-            const response = await fetch(`http://localhost:3000/api/update-habit/${habit.id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
-            });
+            const response = await fetch(
+                `http://localhost:3000/api/update-habit/${habit.id}`,
+                {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                }
+            );
 
             const data = await response.json();
             console.log("Update API response:", data);
@@ -59,7 +71,7 @@ const EditHabitModal = ({ visible, habit, onClose, onSave }: any) => {
                         Edit Habit
                     </Text>
 
-                    {/* Name Field */}
+                    {/* Habit Name */}
                     <View className="mb-4">
                         <Text className="text-gray-700 font-medium mb-1">Name</Text>
                         <TextInput
@@ -91,6 +103,46 @@ const EditHabitModal = ({ visible, habit, onClose, onSave }: any) => {
                             onChangeText={(text) => handleChange("frequency", text)}
                             className="border border-gray-300 rounded-lg p-3"
                         />
+                    </View>
+
+                    {/* Status Selection */}
+                    <View className="mb-4">
+                        <Text className="text-gray-700 font-medium mb-2">Status</Text>
+                        <View className="flex-row justify-between">
+                            <TouchableOpacity
+                                onPress={() => handleChange("status", "pending")}
+                                className={`flex-1 py-3 mr-2 rounded-xl items-center border ${formData.status === "pending"
+                                        ? "bg-yellow-100 border-yellow-500"
+                                        : "bg-gray-100 border-gray-300"
+                                    }`}
+                            >
+                                <Text
+                                    className={`font-semibold ${formData.status === "pending"
+                                            ? "text-yellow-700"
+                                            : "text-gray-800"
+                                        }`}
+                                >
+                                    Pending
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                onPress={() => handleChange("status", "completed")}
+                                className={`flex-1 py-3 ml-2 rounded-xl items-center border ${formData.status === "completed"
+                                        ? "bg-green-100 border-green-500"
+                                        : "bg-gray-100 border-gray-300"
+                                    }`}
+                            >
+                                <Text
+                                    className={`font-semibold ${formData.status === "completed"
+                                            ? "text-green-700"
+                                            : "text-gray-800"
+                                        }`}
+                                >
+                                    Completed
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                     {/* Ask AI */}

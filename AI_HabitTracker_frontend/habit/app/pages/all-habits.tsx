@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Modal, ActivityIndicator, Alert } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Habits from "../components/Habits";
 
@@ -106,46 +105,6 @@ const AllHabits = () => {
           <Habits habit={habit} index={index} />
         ))}
       </ScrollView>
-
-      <Modal
-        visible={!!selectedHabit}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setSelectedHabit(null)}
-      >
-        <View className="flex-1 justify-center items-center bg-black/40">
-          <View className="bg-white w-3/4 p-6 rounded-2xl shadow-lg">
-            <Text className="text-lg font-semibold mb-4 text-gray-800">
-              Change Status
-            </Text>
-
-            {["pending", "done", "missed"].map((status) => (
-              <TouchableOpacity
-                key={status}
-                onPress={() =>
-                  selectedHabit &&
-                  updateHabitStatus(selectedHabit.id, status as "done" | "pending" | "missed")
-                }
-                className={`flex-row items-center mb-3 px-4 py-3 rounded-lg ${getStatusStyle(
-                  status
-                )}`}
-              >
-                <Feather name={getStatusIcon(status)} size={18} color="white" />
-                <Text className="text-white font-semibold ml-2 capitalize">
-                  {status}
-                </Text>
-              </TouchableOpacity>
-            ))}
-
-            <TouchableOpacity
-              onPress={() => setSelectedHabit(null)}
-              className="mt-2 py-2 rounded-lg bg-gray-200 items-center"
-            >
-              <Text className="text-gray-800 font-medium">Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 };
