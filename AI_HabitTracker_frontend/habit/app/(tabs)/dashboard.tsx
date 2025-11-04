@@ -3,23 +3,17 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import AISuggestions from "./AISuggestions";
+
+import AISuggestions from "../pages/AISuggestions";
 import AddHabitBtn from "../components/AddHabit-btn";
 import AllHabitsBtn from "../components/AllHabits-btn";
 
 export default function Dashboard() {
   const router = useRouter();
 
-  const handleLogout = async () => {
-    try {
-      await AsyncStorage.removeItem("userId");
-      router.push("/pages/login");
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
+
+  // };
 
   return (
     <View className="flex-1 bg-gray-50">
@@ -50,7 +44,7 @@ export default function Dashboard() {
             </View>
           </View>
           <AISuggestions />
-          <Link href="/pages/Progress" asChild>
+          <Link href="/Progress" asChild>
             <TouchableOpacity className="bg-white p-6 mt-4 rounded-2xl shadow-md active:opacity-90">
               <View className="flex-row items-center justify-between">
                 <View>
@@ -74,12 +68,12 @@ export default function Dashboard() {
             <Text className="text-gray-600">Badges: 2</Text>
             <Text className="text-gray-600">Points: 450</Text>
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={handleLogout}
             className="bg-red-500 w-fit p-4 mt-6 rounded-2xl shadow-md active:opacity-90"
           >
             <Text className="text-black text-center font-semibold">Logout</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
 
 

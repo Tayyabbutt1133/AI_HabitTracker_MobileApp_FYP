@@ -1,16 +1,11 @@
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import FeatureCard from "./components/FeatureCard";
 import { LinearGradient } from 'expo-linear-gradient'
 import { Feather } from '@expo/vector-icons'
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-export const Index= async ()=> {
-
-  // const userId = await AsyncStorage.getItem("userId");
-  // if (userId) router.push('/pages/dashboard')
 
 
+export default function Index() {
 
   return (
     <ScrollView className="flex-1 bg-white">

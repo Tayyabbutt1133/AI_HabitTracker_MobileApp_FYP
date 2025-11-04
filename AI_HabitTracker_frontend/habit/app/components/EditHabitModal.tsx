@@ -11,7 +11,7 @@ import {
 const EditHabitModal = ({ visible, habit, onClose, onSave }: any) => {
     const [formData, setFormData] = useState({
         ...habit,
-        status: habit?.status || "pending", // default value
+        status: habit?.status || "pending",
     });
 
     const [confirming, setConfirming] = useState(false);
@@ -112,14 +112,14 @@ const EditHabitModal = ({ visible, habit, onClose, onSave }: any) => {
                             <TouchableOpacity
                                 onPress={() => handleChange("status", "pending")}
                                 className={`flex-1 py-3 mr-2 rounded-xl items-center border ${formData.status === "pending"
-                                        ? "bg-yellow-100 border-yellow-500"
-                                        : "bg-gray-100 border-gray-300"
+                                    ? "bg-yellow-100 border-yellow-500"
+                                    : "bg-gray-100 border-gray-300"
                                     }`}
                             >
                                 <Text
                                     className={`font-semibold ${formData.status === "pending"
-                                            ? "text-yellow-700"
-                                            : "text-gray-800"
+                                        ? "text-yellow-700"
+                                        : "text-gray-800"
                                         }`}
                                 >
                                     Pending
@@ -129,14 +129,14 @@ const EditHabitModal = ({ visible, habit, onClose, onSave }: any) => {
                             <TouchableOpacity
                                 onPress={() => handleChange("status", "completed")}
                                 className={`flex-1 py-3 ml-2 rounded-xl items-center border ${formData.status === "completed"
-                                        ? "bg-green-100 border-green-500"
-                                        : "bg-gray-100 border-gray-300"
+                                    ? "bg-green-100 border-green-500"
+                                    : "bg-gray-100 border-gray-300"
                                     }`}
                             >
                                 <Text
                                     className={`font-semibold ${formData.status === "completed"
-                                            ? "text-green-700"
-                                            : "text-gray-800"
+                                        ? "text-green-700"
+                                        : "text-gray-800"
                                         }`}
                                 >
                                     Completed

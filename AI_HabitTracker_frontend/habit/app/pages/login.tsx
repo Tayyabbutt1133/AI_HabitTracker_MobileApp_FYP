@@ -38,7 +38,7 @@ export default function LoginScreen() {
           text1: "Login Successful 🎉",
           text2: "Welcome back!",
         });
-        router.push("/pages/dashboard");
+        router.replace("/dashboard");
       } else {
         Toast.show({
           type: "error",
