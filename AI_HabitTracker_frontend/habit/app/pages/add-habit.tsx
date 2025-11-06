@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert} from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
@@ -32,7 +32,7 @@ export default function AddHabit() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/post-habit", {
+      const response = await fetch(`http://localhost:3000/api/post-habit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export default function AddHabit() {
       const data = await response.json();
 
       if (response.ok) {
-        
+
         Alert.alert("Success", "Habit added successfully!");
         // clear inputs
         sethabit_name("");

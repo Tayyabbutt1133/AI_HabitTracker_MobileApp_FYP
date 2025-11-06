@@ -5,13 +5,17 @@ import { Feather } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from "react-native-toast-message";
+import { API_URL } from "@env";
 
 
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showpassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  console.log("API URL is : ", API_URL)
 
 
 
@@ -84,14 +88,27 @@ export default function LoginScreen() {
 
         <View>
           <Text className="text-gray-700 font-semibold mb-2">Password</Text>
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Enter your password"
-            placeholderTextColor="#9CA3AF"
-            className="border border-gray-300 rounded-xl px-4 py-3 text-base text-gray-900"
-            secureTextEntry
-          />
+          <View className="relative">
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Enter your password"
+              placeholderTextColor="#9CA3AF"
+              className="border border-gray-300 rounded-xl px-4 py-3 text-base text-gray-900 pr-10" // pr-10 to give space for the icon
+              secureTextEntry={!showpassword}
+            />
+
+            <TouchableOpacity
+              onPress={() => setShowPassword(!showpassword)}
+              className="absolute right-3 top-3"
+            >
+              <Feather
+                name={showpassword ? "eye" : "eye-off"}
+                size={20}
+                color=""
+              />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <TouchableOpacity className="self-end">

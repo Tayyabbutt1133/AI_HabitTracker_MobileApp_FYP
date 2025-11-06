@@ -13,8 +13,6 @@ export default function Dashboard() {
   const router = useRouter();
 
 
-  // };
-
   return (
     <View className="flex-1 bg-gray-50">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -68,15 +66,6 @@ export default function Dashboard() {
             <Text className="text-gray-600">Badges: 2</Text>
             <Text className="text-gray-600">Points: 450</Text>
           </View>
-          {/* <TouchableOpacity
-            onPress={handleLogout}
-            className="bg-red-500 w-fit p-4 mt-6 rounded-2xl shadow-md active:opacity-90"
-          >
-            <Text className="text-black text-center font-semibold">Logout</Text>
-          </TouchableOpacity> */}
-
-
-
         </View>
       </ScrollView>
     </View>

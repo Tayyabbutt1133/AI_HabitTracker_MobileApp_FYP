@@ -146,7 +146,7 @@ export async function updateHabit(req, res) {
                 frequency,
                 askAI,
                 AIsuggestions: updatedSuggestion,
-                status : status
+                status: status
             },
         });
 
@@ -175,4 +175,26 @@ export async function deleteHabitById(req, res) {
         console.error("Error deleting habit:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
+}
+
+export async function getAISuggestions(req, res) {
+
+
+    const {userId} = req.params;
+    const id = parseInt(userId);
+
+    const AIsuggestions = await prisma.habits.findMany({
+        where: {
+            userId: id
+        },
+        select: {
+            AIsuggestions: true
+        },
+        take : 3
+    })
+    return res.status(StatusCodes.OK).json({
+        suggestions: AIsuggestions
+    });
+
+
 }

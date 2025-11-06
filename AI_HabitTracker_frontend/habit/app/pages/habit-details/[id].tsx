@@ -48,7 +48,7 @@ export default function HabitDetail() {
       console.log("Response from delete API : ", data);
       if (res.ok) {
         Alert.alert("Deleted", "Habit deleted successfully!");
-        router.push('/pages/dashboard')
+        router.push('/dashboard')
       } else {
         Alert.alert("Error", "Failed to delete habit.");
       }

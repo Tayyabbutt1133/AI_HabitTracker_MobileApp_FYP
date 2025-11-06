@@ -10,6 +10,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
 import { Link, useRouter } from "expo-router";
+import Config from "react-native-config";
 
 export default function SignupScreen() {
   const [name, setName] = useState("");
@@ -24,7 +25,7 @@ export default function SignupScreen() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/signup", {
+      const response = await fetch(`${Config.BASE_URL}/api/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +37,7 @@ export default function SignupScreen() {
 
       if (response.ok) {
         Alert.alert("Success", "Account created successfully!");
-        router.push("/pages/dashboard");
+        router.push("/dashboard");
       } else {
         Alert.alert("Signup Failed", data.message || "Please try again.");
       }

@@ -1,4 +1,3 @@
-import { router } from "expo-router";
 import React, { useState } from "react";
 import { Modal, View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 
@@ -38,7 +37,7 @@ const DeleteHabitModal = ({ visible, onClose, habitName, onConfirm }: any) => {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            onPress={()=>onConfirm()}
+                            onPress={() => onConfirm()}
                             disabled={loading}
                             className="bg-red-500 px-5 py-2 rounded-xl"
                         >
